@@ -1,0 +1,247 @@
+.about-page {
+  background-color: #fff;
+}
+
+.page-banner {
+  background: linear-gradient(90deg, #003399 0%, #9933CC 100%);
+  padding: 60px 0;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+/* Sección principal de Quienes Somos */
+.about-section {
+  padding: 40px 0 60px;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-text h2 {
+  color: var(--color-blue);
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+  line-height: 1.7;
+}
+
+/* ------------------------------------Sección del Organigrama -------------------------------------------*/
+/* Sección de Misión y Visión */
+.organigram-section {
+  background: linear-gradient(90deg, #9933CC 0%, #003399 100%);
+  color: white;
+  padding: 60px 0;
+}
+
+.organigram-content {
+  display: grid;
+  align-items: center;
+}
+
+.organigram-image img{
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+/* ------------------------------------Sección del Organigrama -------------------------------------------*/
+
+/* Sección de Misión y Visión */
+.mission-vision {
+  background-color: var(--color-light-gray);
+  padding: 60px 0;
+}
+
+.mission-vision-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.mission-box, .vision-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.mission-box h3, .vision-box h3 {
+  color: var(--color-red);
+  margin-bottom: 15px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.mission-box p, .vision-box p {
+  line-height: 1.7;
+}
+
+/* Sección de Valores */
+.values-section {
+  padding: 60px 0;
+}
+
+.values-title {
+  text-align: left;
+  margin-bottom: 40px;
+  margin-right: 24px;
+  color: var(--color-blue);
+  font-size: 28px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.value-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+}
+
+.value-icon {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.value-card h3 {
+  color: var(--color-red);
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.value-card p {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+/* Sección del Equipo */
+.team-section {
+  background-color: var(--color-light-gray);
+  padding: 60px 0;
+}
+
+.team-title {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--color-blue);
+  font-size: 28px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.team-member {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-image {
+  height: 280px;
+  overflow: hidden;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-image img {
+  transform: scale(1.05);
+}
+
+.member-name {
+  padding: 15px 15px 5px;
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+  color: var(--color-blue);
+}
+
+.member-position {
+  padding: 0 15px 15px;
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+  color: var(--color-red);
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .mission-vision-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-banner {
+    padding: 40px 0;
+  }
+  
+  .page-title {
+    font-size: 28px;
+  }
+}

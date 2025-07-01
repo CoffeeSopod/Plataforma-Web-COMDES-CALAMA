@@ -1,0 +1,30 @@
+# Enrutamiento
+npm install react-router-dom
+
+# Manejo de peticiones HTTP
+npm install axios
+
+# Estilos - elige una opción:
+# Opción 1: Para CSS Modules (incluido en CRA)
+# Opción 2: Para Styled Components
+npm install styled-components
+# Opción 3: Para Tailwind CSS
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+# Iconos
+npm install react-icons
+
+# Carruseles y sliders
+npm install swiper
+
+# Formularios
+npm install react-hook-form
+
+# Animaciones
+npm install framer-motion
+
+# Componentes UI (opcional - elegir uno)
+npm install @mui/material @emotion/react @emotion/styled
+# O
+npm install @chakra-ui/react @emotion/react @emotion/styled
