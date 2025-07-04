@@ -10,7 +10,7 @@ const TopBar = () => {
         <div className="logo-container">
           <Link to="/" className="logo-link">
             <img 
-              src="/assets/images/logo.png" 
+              src="/assets/images/logo_comdes_blanco.png" 
               alt="COMDES Calama Logo" 
               className="logo"
             />

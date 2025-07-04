@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const MainNav = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -14,6 +15,16 @@ const MainNav = () => {
     // Implementar lógica de búsqueda
     console.log(`Buscando: ${searchQuery}`);
   };
+
+  const enlaces = [
+    { nombre: "Ley del Lobby",      url: "https://www.leylobby.gob.cl/instituciones/CM018"      },
+    { nombre: "Autoconsulta",       url: "http://ac.comdescalama.cl:8009/autoconsulta/"     },
+    { nombre: "Temponet",           url: "http://tempo.comdescalama.cl/TempoNet/Account/Login/"         },
+    { nombre: "Convenios",          url: "https://www.comdescalama.cl/convenios-comdes/"         },
+    { nombre: "Compras públicas",   url: "https://www.mercadopublico.cl/Portal/Modules/Site/Busquedas/ResultadoBusqueda.aspx?qs=1&IdEmpresa=nR/LAf|fFJ8="    }
+  ];
+
+
 
   return (
     <nav className="main-nav">
@@ -29,34 +40,50 @@ const MainNav = () => {
               Quienes Somos
             </NavLink>
           </li>
+
           <li className="nav-item">
-            <NavLink to="/comdes-al-dia" className={({ isActive }) => isActive ? 'active' : ''}>
-              Comdes al Día
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/intranet" className={({ isActive }) => isActive ? 'active' : ''}>
+            <NavLink to="/quienes-somos" className={({ isActive }) => isActive ? 'active' : ''}>
               Intranet
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/servicios" className={({ isActive }) => isActive ? 'active' : ''}>
-              Servicios
-            </NavLink>
+            <a href="#centros" className="nav-link">
+              Centros
+            </a>
           </li>
           <li className="nav-item">
-            <NavLink to="/contacto" className={({ isActive }) => isActive ? 'active' : ''}>
-              Contacto
-            </NavLink>
+            <a href="#contactos" className="nav-link">
+              Contactos
+            </a>
           </li>
+
         </ul>
         
         <div className="nav-right">
-          <div className="phone-number">
-            <span className="phone-icon">📞</span>
-            <span className="phone">4242</span>
+
+          <div className="enlaces-dropdown">
+            <div className="phone-number" onClick={() => setIsOpen(!isOpen)}>
+              <span className="enlace-title">Servicios administrativos</span>
+              <span className="dropdown-arrow">{isOpen ? "▲" : "▼"}</span>
+            </div>
+            {isOpen && (
+              <ul className="dropdown-menu">
+                {enlaces.map((item, index) => (
+                  <li key={index}>
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="dropdown-link"
+                    >
+                      {item.nombre}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          
+
           <form className="search-form" onSubmit={handleSearchSubmit}>
             <input 
               type="text" 

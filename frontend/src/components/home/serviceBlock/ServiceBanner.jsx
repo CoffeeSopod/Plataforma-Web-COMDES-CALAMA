@@ -5,7 +5,7 @@ import './ServiceBanner.css';
 
 const ServiceBanner = () => {
   return (
-    <section className="service-banner">
+    <section id="centros" className="service-banner">
       <div className="container">
         <div className="farmacia-banner">
           <div className="farmacia-content">

@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 
 .header {
   width: 100%;
@@ -105,20 +108,52 @@
   align-items: center;
 }
 
-.phone-number {
+.enlaces-dropdown{
+  font-weight: 500;
+  font-size: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.phone-number{
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  color: white;
-  margin-right: 20px;
+  gap: 8px;
 }
 
-.phone-icon {
-  margin-right: 5px;
+.dropdown-arrow {
+  font-size: 12px;
 }
 
-.phone {
-  font-size: 18px;
-  font-weight: bold;
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 0;
+  margin-top: 4px;
+  z-index: 100;
+  width: 260px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+}
+
+.dropdown-menu li {
+  list-style: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: default;
+}
+
+.dropdown-menu li:hover{
+  list-style: none;
+  background-color: #cdcbce;
 }
 
 .search-form {
