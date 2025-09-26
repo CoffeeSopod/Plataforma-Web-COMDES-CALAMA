@@ -1,0 +1,303 @@
+/* ========= Variables y layout base ========= */
+:root{
+  --page-max: 1200px;                 /* alinear con header/footer */
+  --gutter: clamp(16px, 3vw, 32px);   /* padding lateral del sitio */
+  --brand-cta: #F86641;
+  --ink-900: #0f172a;
+}
+
+.ct-shell{
+  margin-inline: auto; 
+}
+
+.ct-cards{
+  padding-inline: var(--gutter); max-width: var(--page-max);
+  margin-inline: auto; 
+}
+
+/* ========= BANNER DE CONTACTO (UNIDAD) ========= */
+.ct-hero{
+  position: relative;
+  height: 200px;
+  border-radius: 16px;
+  background: #14213d;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  margin: 24px;              
+}
+.ct-hero-overlay{ position:absolute; inset:0; background: rgba(3,7,18,.35); }
+.ct-hero::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(180deg,#002e8b9d 0%, #002e8bf8 100%);
+  mix-blend-mode: multiply;
+}
+.ct-hero-content{
+  position: relative; z-index: 1;
+  height: 100%;
+  display: flex; align-items: center; gap: 14px; color: #fff;
+  padding-inline: var(--gutter);margin-inline: auto; max-width: var(--page-max);
+}
+.ct-hero-title{ margin: 0; font-size: clamp(24px, 4vw, 44px); font-weight: 800; }
+.ct-icon{ font-size: clamp(24px, 4vw, 64px); }
+
+/* ====== Barras de color bajo el hero ====== */
+.colores-barra{
+  position: absolute; bottom: 0; left: 0; right: 0;
+  width: 100%; height: 4px; display: flex; margin: 0; padding: 0;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05) inset;
+}
+.colores-barra .barra{ flex: 1 1 0; display: block; }
+.stripe-purple{ background:#6D28D9; }
+.stripe-blue  { background:#1D4ED8; }
+.stripe-green { background:#16A34A; }
+.stripe-white { background:#FFFFFF; }
+.stripe-yellow{ background:#FDE047; }
+.stripe-orange{ background:#FB923C; }
+.stripe-red   { background:#DC2626; }
+
+/* ========= Secciones ========= */
+.ct-section{ 
+  margin: 28px 0;
+}
+
+.ct-section.soft{ background:#f7f7fb; border-radius:14px; padding:16px; }
+.ct-subtitle{ color:#16324f; font-weight:800; margin-bottom:16px; font-size:18px; }
+.ct-muted{ color:#8a94a6; }
+
+/* ===== Contactos: estética alineada a la tarjeta nueva ===== */
+
+/* Vars locales de la card líder */
+.ct-lead-card.ct-redesign{
+  --pad-x: clamp(16px, 2.6vw, 28px);
+  --pad-y: clamp(16px, 2.4vw, 28px);
+  --gap: clamp(14px, 2.2vw, 24px);
+  --ring: #EAE5FD;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr;
+  align-items: center;
+  gap: var(--gap);
+  background: #fff;
+  border: 6px solid var(--ring);
+  border-radius: 16px;
+  padding: calc(var(--pad-y) + 34px) var(--pad-x) var(--pad-y); /* deja espacio para el badge */
+  overflow: hidden;
+  isolation: isolate; /* sombras limpias */
+}
+
+/* Fondo decorativo (igual que la otra card) */
+.ct-lead-card.ct-redesign::before{
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--lead-bg);
+  background-size: cover;
+  background-position: left top;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Badge de cargo (derecha, con borde izq redondeado) */
+.ct-badge{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: var(--brand-cta);
+  color: #fff;
+  font-weight: 800;
+  padding: 10px 18px 12px 22px;
+  border-radius: 999px 14px 14px 999px;
+  box-shadow: 0 12px 28px rgba(248,102,65,.28);
+  max-width: min(72%, 560px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  z-index: 2;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s;
+}
+.ct-lead-card.ct-redesign:hover .ct-badge{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(248,102,65,.34);
+}
+
+/* Avatar circular con aro y micro-animación */
+.ct-lead-photo{ display: grid; place-items: center; z-index: 1; }
+
+.ct-avatar-encargado{
+  width: clamp(120px, 17vw, 200px);
+  height: clamp(120px, 17vw, 200px);
+  border-radius: 50%;
+  object-fit: contain;
+  background: #fff;
+  padding: 0;               
+  aspect-ratio: auto;       
+  box-shadow:
+    0 0 0 8px #fff,
+    0 10px 28px rgba(0,0,0,.12);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s;
+}
+
+/* Texto y tamaño del nombre */
+.ct-lead-info{ 
+  position: relative; 
+  z-index: 1; 
+  display: grid; 
+  gap: clamp(10px, 1.4vw, 14px); 
+  margin-left: 20px;
+
+}
+.ct-lead-info .ct-name{
+  color: #0f172a !important;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  font-size: clamp(22px, 3.6vw, 36px);
+}
+
+/* Chips de contacto (ul → li “pastillas”) */
+.ct-list{ list-style: none; padding: 4px 0 0; margin: 0; display: grid; gap: 10px; }
+.ct-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px #ECECF3, 0 3px 10px rgba(0,0,0,.05);
+  padding: 8px;
+  transition: box-shadow .25s, transform .25s;
+}
+.ct-chip .ct-chip-text{
+  display: inline-block;
+  background: #F3F4F6;
+  color: #374151;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.ct-chip svg{ color: var(--brand-cta); font-size: 1.2rem; transition: transform .25s; padding-left: 16px;}
+.ct-chip:hover{ transform: translateY(-1px); box-shadow: inset 0 0 0 1px #E4E6F0, 0 6px 16px rgba(0,0,0,.08); }
+.ct-chip:hover svg{ transform: translateY(-1px) scale(1.05); }
+
+/* Efecto parallax sutil del fondo */
+.ct-lead-card.ct-redesign::before{ transition: transform .6s cubic-bezier(.16,1,.3,1); }
+.ct-lead-card.ct-redesign:hover::before{ transform: scale(1.02) translateY(-1px); }
+
+/* Responsivo de la card líder */
+@media (max-width: 900px){
+  .ct-lead-card.ct-redesign{
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+    padding: calc(var(--pad-y) + 40px) var(--pad-x) var(--pad-y);
+  }
+  .ct-badge{ left: 10px; right: 10px; border-radius: 999px; text-align: center; }
+  .ct-list{ justify-items: center; }
+}
+
+/* Respeto a reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .ct-lead-card.ct-redesign *{ animation: none !important; transition: none !important; }
+}
+
+/* ===== Equipo: estética alineada ===== */
+.ct-card.ct-member{
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 8px 26px rgba(2,6,23,.06);
+  padding: 18px 16px 20px;
+  transition: transform .3s, box-shadow .3s;
+}
+.ct-card.ct-member:hover{ transform: translateY(-2px); box-shadow: 0 14px 36px rgba(2,6,23,.08); }
+
+.ct-card-top{ display: grid; place-items: center; margin-top: -44px; }
+.ct-avatar-miembro{
+  width: clamp(100px, 20vw, 140px);
+  height: clamp(100px, 20vw, 140px);
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 0;
+  aspect-ratio: auto;
+  box-shadow: 0 0 0 6px #fff, 0 8px 22px rgba(0,0,0,.12);
+}
+
+.ct-card .ct-name{ font-weight: 800; color: var(--ink-900); text-align: center; margin-top: 6px; }
+.ct-card .ct-role{
+  margin: 8px auto;
+  background: var(--brand-cta);
+  color: #fff;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 4px 14px;
+  display: inline-block;
+  font-size: 13px;
+}
+
+/* Chips dentro de cards del equipo */
+.ct-card .ct-list{ display: grid; gap: 8px; justify-items: center; }
+.ct-card .ct-chip{ padding: 6px 8px; }
+.ct-card .ct-chip .ct-chip-text{ padding: 8px 12px; }
+
+/* Grid del equipo: respiración extra en pantallas grandes */
+.ct-grid{ gap: clamp(12px, 2vw, 20px); }
+
+
+/* ========= Botones / helpers ========= */
+.btn-outline{ background:#fff; color:#0b2f59; border:1px solid #cbd5e1; border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer; }
+.ct-alert.error{ background:#fee2e2; color:#991b1b; padding:12px; border-radius:10px; }
+
+/* ========= Skeletons ========= */
+.ct-skeleton-hero{
+  border-radius:16px; height:260px;
+  background: linear-gradient(90deg,#e5e7eb 25%,#f3f4f6 37%,#e5e7eb 63%);
+  background-size:400% 100%; animation: ct-shimmer 1.4s infinite;
+}
+.ct-skeleton-line{
+  height:20px; width:220px; border-radius:8px;
+  background: linear-gradient(90deg,#e5e7eb 25%,#f3f4f6 37%,#e5e7eb 63%);
+  background-size:400% 100%; animation: ct-shimmer 1.4s infinite;
+}
+.ct-skeleton-card{
+  height:180px; border-radius:14px; border:1px solid #eef2f7;
+  background: linear-gradient(90deg,#e5e7eb 25%,#f3f4f6 37%,#e5e7eb 63%);
+  background-size:400% 100%; animation: ct-shimmer 1.4s infinite;
+}
+@keyframes ct-shimmer{
+  0%{ background-position: 100% 0; }
+  100%{ background-position: 0 0; }
+}
+
+/* --- Reset seguro para que el avatar del encargado sea SIEMPRE circular --- */
+.ct-avatar.ct-avatar-encargado{
+  /* tamaño + relación 1:1 para círculos perfectos */
+  width: clamp(120px, 17vw, 200px);
+  height: auto;
+  aspect-ratio: 1 / 1 !important;
+
+  /* forma y ajuste de imagen */
+  border-radius: 50% !important;
+  object-fit: cover !important;   /* NO contain */
+  padding: 0 !important;          /* elimina el padding heredado */
+  background: #fff;               /* para el aro blanco */
+
+  /* aro + sombra */
+  box-shadow:
+    0 0 0 8px #EAE5FD,
+    0 10px 28px rgba(0,0,0,.12);
+}
+
+/* Si mantienes una regla base .ct-avatar antigua, neutralízala */
+.ct-avatar{
+  padding: 0;                 /* antes era 12px */
+  border-radius: 0;           /* que no imponga bordes */
+  aspect-ratio: auto;         /* que no fuerce 1:1 salvo que se pida */
+  object-fit: cover;          /* valor razonable por defecto */
+}
+
+/* Para miembros del equipo, aseguremos círculo también */
+.ct-avatar.ct-avatar-miembro{
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  padding: 0;
+}

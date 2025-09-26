@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import HeroBanner from '../components/home/heroBanner/HeroBanner.jsx';
 import NewsHighlight from '../components/home/NewsHighLight/NewsHighLight.jsx';
-import ServiceBanner from '../components/home/serviceBlock/ServiceBanner.jsx';
-import ServiceBlocks from '../components/home/serviceBlock/ServiceBlock.jsx';
+import ServiceBanner from '../components/home/seccion_salud/ServiceBanner.jsx';
+import ServiceBlocks from '../components/home/seccion_salud/enlaces_salud.jsx';
 import Newsletter from '../components/home/newsLetter/NewsLetter.jsx';
 import './Home.css';
+import { Link } from 'react-router-dom';
+
 
 const Home = () => {
   // Scroll to top when component mounts
@@ -15,9 +17,9 @@ const Home = () => {
   return (
     <div className="home-page">
       <HeroBanner />
-      <NewsHighlight />
       <ServiceBanner />
       <ServiceBlocks />
+
       <Newsletter />
     </div>
   );

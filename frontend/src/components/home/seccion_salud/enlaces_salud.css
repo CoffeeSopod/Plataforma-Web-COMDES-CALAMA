@@ -1,0 +1,180 @@
+/* —————— SECCIÓN PRINCIPAL —————— */
+.service-blocks {
+  padding: 0 0 120px 0;
+  background-color: white;
+  padding-top: 50px;
+}
+
+.service-blocks .blocks-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.service-blocks .service-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  height: 160px;
+  color: white;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform .3s ease, box-shadow .3s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #333;
+  cursor: pointer;
+}
+
+.service-blocks .service-block:hover {
+  transform: translateY(-5px);
+  color: #FFEEA9;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.service-blocks .block-title {
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* —————— RESPONSIVE —————— */
+@media (max-width: 992px) {
+  .service-blocks .blocks-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .service-blocks .blocks-container {
+    grid-template-columns: 1fr;
+  }
+  .service-blocks .service-block {
+    height: 80px;
+  }
+}
+
+/* —————— MODAL (Bootstrap) —————— */
+/* Asegura que el modal flote bien sobre todo */
+.modal {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  display: block !important;
+  z-index: 2000 !important;
+}
+
+/* Backdrop semitransparente */
+.modal-backdrop {
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1500 !important;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Centrado vertical y horizontal del diálogo */
+.modal-dialog {
+  margin: 0;               /* elimina márgenes por defecto */
+  min-height: 100vh;       /* que ocupe toda la altura */
+  display: flex;
+  align-items: center;     /* centrar vertical */
+  justify-content: center; /* centrar horizontal */
+}
+
+/* Animación suave de entrada */
+.modal.show .modal-dialog {
+  transform: translateY(0);
+  transition: transform 0.3s ease-out;
+}
+
+/* ——————— Custom Modal ——————— */
+/* Apunta al modal con tu clase de diálogo */
+.custom-modal .modal-content {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 40%;
+}
+
+/* Cabecera con degradado y texto claro */
+.custom-modal-header {
+  background: linear-gradient(90deg,rgb(0, 46, 139) 0%, rgba(105, 57, 183, 1) 44%, rgba(255, 105, 76, 1) 100%);;
+  border-bottom: none;
+  color: #fff;
+  padding: 1.5rem 2rem;
+}
+.custom-modal-header .btn-close {
+  filter: invert(1);
+}
+
+/* Body con fondo suave y grid de enlaces */
+.custom-modal-body {
+  background-color: #fafafa;
+  padding: 2rem;
+}
+.links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+}
+
+/* Cada enlace como “card” con overlay */
+.modal-body .link-block {
+  position: relative;
+  width: 100%;
+  /* 1) Altura fija o variable según necesites */
+  height: 120px;            /* puedes cambiarla o eliminarla */
+  max-height: 200px;        /* opcional, para no pasarte de alto */
+  /* 2) Que la imagen se ajuste sin recortarse */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* 3) Opcional: forzar proporción */
+  aspect-ratio: 16/9;       /* ajústalo a la que tengan tus imgs */
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-body .link-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transition: background 0.3s ease;
+}
+.modal-body .link-block:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.modal-body .link-block:hover::before {
+  background: #002e8b44;
+}
+
+/* Texto del enlace sobre el overlay */
+.link-label {
+  position: relative;
+  z-index: 1;
+  color: #fff3f3;
+  font-size: 1rem;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* Footer minimalista */
+.custom-modal-footer {
+  background: linear-gradient(90deg,rgba(0, 47, 139, 1) 0%, rgba(105, 57, 183, 1) 44%, rgba(255, 105, 76, 1) 100%);;
+  border-top: none;
+  padding: 1rem 2rem;
+}
+.custom-modal-footer .btn-outline-secondary {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+}

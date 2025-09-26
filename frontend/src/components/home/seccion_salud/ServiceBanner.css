@@ -1,0 +1,153 @@
+/* =========================================================
+   ServiceBanner.css — Fondo full-bleed + overlap con Hero
+   ========================================================= */
+
+/* ====== Carrusel Keen ====== */
+.meds-block { position: relative; }
+.meds-keen { position: relative; }
+.meds-keen .keen-slider { overflow: hidden; }
+.keen-slider__slide { display: flex; }
+.keen-slider__slide > .med-item { width: 100%; }
+
+.meds-keen .edge-fade{
+  position:absolute; top:0; bottom:0; width:36px; z-index:4; pointer-events:none; display:block;
+}
+.meds-keen .edge-fade.left{  left:0;  background:linear-gradient(90deg, rgba(243,244,246,1), rgba(243,244,246,0)); }
+.meds-keen .edge-fade.right{ right:0; background:linear-gradient(270deg, rgba(243,244,246,1), rgba(243,244,246,0)); }
+
+.meds-keen .nav-btn{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border: 0; border-radius: 999px; cursor: pointer;
+  background: #fff; color: #111827; font-size: 24px; line-height: 1;
+  box-shadow: 0 10px 24px rgba(0,0,0,.12); z-index: 5;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.meds-keen .nav-prev{ left: 1px; }
+.meds-keen .nav-next{ right: 1px; }
+.meds-keen .nav-btn:hover{ transform: translateY(-50%) scale(1.04); box-shadow: 0 14px 30px rgba(0,0,0,.16); }
+.meds-keen .nav-btn:active{ transform: translateY(-50%) scale(.98); }
+@media (max-width: 560px){
+  .meds-keen .nav-prev{ left: 4px; }
+  .meds-keen .nav-next{ right: 4px; }
+}
+
+/* ====== Cards ====== */
+.med-item{
+  background-color: #FEFEFE; border-radius:16px;
+  box-shadow:0 10px 28px rgba(2,6,23,.08);
+  display:grid; gap:12px; padding:14px; height:100%;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  border:2px solid var(--cta, #F0EBF9); border-top: 20px solid var(--cta, #F0EBF9);
+}
+.med-item:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(2,6,23,.12); }
+
+.med-thumb{ position: relative; width:100%; aspect-ratio: 4 / 3; border-radius:12px; overflow:hidden; margin:16px 0; }
+.med-thumb img{ position:absolute; inset:0; width:100%; height:100%; object-fit: contain; object-position:center; display:block; }
+
+.stock-badge{
+  position:absolute; left:10px; top:10px; padding:6px 10px; border-radius:999px; font-size:.76rem; font-weight:800;
+  border:1px solid transparent; line-height:1; box-shadow:0 1px 0 rgba(0,0,0,.03); backdrop-filter: saturate(1.1);
+}
+.stock-badge.stock-ok  { background:#e8f7ee; color:#166534; border-color:#bbf7d0; }
+.stock-badge.stock-mid { background:#eef2ff; color:#3730a3; border-color:#c7d2fe; }
+.stock-badge.stock-low { background:#fff7ed; color:#9a3412; border-color:#fed7aa; }
+.stock-badge.stock-none{ background:#fee2e2; color:#991b1b; border-color:#fecaca; }
+
+.med-body{ display:grid; gap:6px; }
+.med-name{ font-weight:900; color:#0f172a; font-size:1.02rem; line-height:1.2; letter-spacing:.2px;
+  display:-webkit-box; -webkit-box-orient: vertical; overflow:hidden; }
+.med-sub.muted{ color:#64748b; font-size:.92rem; }
+
+.container.meds-block { overflow: hidden; }
+
+/* =========================================================
+   Banner + solución de stacking para el botón
+   ========================================================= */
+
+/* La sección se mete bajo el hero, pero NO crea stacking context bajo él */
+.service-banner{
+  --fc-overlap: clamp(24px, 6vw, 90px);   /* cuanto solapa con el hero */
+  background:#fff;
+  position: relative;
+  z-index: auto;                          /* <- sin stacking context bajo el hero */
+  margin-top: calc(-1 * var(--fc-overlap));
+  padding: 0 0 28px;
+}
+
+/* Fondo lila full-bleed en ::before (no intercepta clics) */
+.fc-hero{
+  --band-h: clamp(110px, 18vw, 170px);
+  --title-size: clamp(32px, 6vw, 60px);
+  --radius: 28px;
+  --fc-max: 1200px;                       /* ancho máximo del contenido */
+  position: relative;
+  isolation: isolate;
+  padding-bottom: 12px;
+}
+.fc-hero::before{
+  content:""; position:absolute; top:0; left:50%; transform: translateX(-50%);
+  width: 100vw; height: var(--band-h);
+  background: #EAE5FD; border-bottom-right-radius: 100px; border-bottom-left-radius: 100px;
+  z-index: 0; pointer-events: none;      /* <- no tapa el CTA */
+  padding-top: 80px;
+}
+/* Si quedó el div .fc-band en el JSX, neutralízalo */
+.fc-band{ display:none !important; }
+
+/* Contenido del banner por ENCIMA del hero */
+.fc-inner{
+  position: relative; z-index: 5;         /* <- sube sobre el hero */
+  max-width: var(--fc-max); margin: 0 auto; padding: 0 16px;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: end;
+  column-gap: clamp(12px, 2.4vw, 24px);
+  min-height: var(--band-h);
+  padding-top: 80px;
+}
+
+/* Logo */
+.fc-logo{
+  width: clamp(68px, 9vw, 150px); height: clamp(68px, 9vw, 150px);
+  border-radius: 50%; object-fit: contain; background:#fff; padding: 10px;
+  box-shadow: 0 0 0 8px #EAE5FD, 0 10px 28px rgba(0,0,0,.12);
+}
+
+/* Título */
+.fc-title{ display:flex; flex-direction:column; line-height:1; margin:0;
+  margin-top: calc(var(--band-h) - var(--title-size)); }
+.fc-farmacia{ font-weight:900; color:#111827; font-size:var(--title-size); letter-spacing:.5px; }
+.fc-ciudadana{ font-weight:900; color:#F86641; font-size:var(--title-size); letter-spacing:.8px; margin-top: clamp(2px, .6vw, 6px); }
+
+/* CTA */
+.fc-cta{
+  position: relative; z-index: 6;         /* <- botón por encima de todo */
+  justify-self: end; align-self: center;
+  background: transparent; color: #111827;
+  border: 3px solid #111827; text-decoration: none;
+  padding: .8rem 3rem; border-radius: 999px; font-weight: 700;
+  transition: transform .2s, box-shadow .2s, background .2s, color .2s, border-color .2s;
+}
+.fc-cta:hover{ transform: translateY(-2px); background:#F86641; border-color: #ffffff; color:#fff; box-shadow:0 8px 18px rgba(0,0,0,.12); }
+
+/* Carrusel debajo */
+.meds-block{ margin-top: clamp(10px, 2vw, 18px); background:#fff; border-radius: var(--radius); }
+.meds-head h3{ margin: 10px 0 12px; color:#0f172a; font-weight:800; }
+
+/* ===== Guardarraíl: si el hero tiene overlays, que no intercepten eventos ===== */
+.hero::before, .hero::after,
+.home-hero::before, .home-hero::after,
+.hero-banner::before, .hero-banner::after{
+  pointer-events: none !important;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 920px){
+  .fc-inner{ grid-template-columns: auto 1fr; row-gap: 12px; }
+  .fc-cta{ grid-column: 1 / -1; justify-self: start; }
+}
+@media (max-width: 600px){
+  .fc-inner{ grid-template-columns: 1fr; align-items: end; }
+  .fc-logo{ order: 1; justify-self: start; }
+  .fc-title{ order: 2; }
+  .fc-cta{ order: 3; justify-self: start; }
+  .fc-title{ margin-top: calc(var(--band-h) - var(--title-size)); }
+}

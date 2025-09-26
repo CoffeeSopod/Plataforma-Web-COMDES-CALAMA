@@ -1,87 +1,171 @@
+:root{
+  --kb-scale-start: 1.002;  /* antes 1.01 */
+  --kb-scale-end:   1.008;  /* antes 1.08 */
+  --kb-duration:    9000ms; /* antes 6000ms */
+  --kb-ease:        cubic-bezier(.2,.8,.2,1);
+}
+
 
 .hero-banner {
   position: relative;
   width: 100%;
-  height: 500px;
+  background: #EAE5FD;
+  z-index: 3;
+  padding: 0 64px;
+  
 }
 
-.banner-content {
+.hero-banner--loading { padding: 0; }
+
+.banner-skeleton {
   width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  position: relative;
+  aspect-ratio: 10 / 2; /* 5:1 */
+  border-radius: 90px 90px 0 0;
+  background: linear-gradient(90deg, #dedede, #efefef, #dedede);
+  animation: sk-pulse 1.2s infinite;
+  box-shadow: 0 8px 15px rgba(0,0,0,.2);
+}
+@keyframes sk-pulse {
+  0% { opacity: .85; } 50% { opacity: .55; } 100% { opacity: .85; }
 }
 
+/* Capa de lectura del texto */
 .banner-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 51, 153, 0.7); /* Tono azul semi-transparente */
+  inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 2; /* por encima del fondo y media */
+  
 }
 
 .banner-text {
   position: relative;
+  z-index: 3; /* por encima de overlay */
   color: white;
   max-width: 800px;
   padding: 100px 0;
 }
-
-.banner-text h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
+.banner-text h1 { font-size: 48px; margin-bottom: 20px; line-height: 1.2; }
 .banner-highlight {
-  background-color: #FF3333; /* Rojo corporativo */
-  padding: 5px 15px;
-  font-weight: bold;
-  display: inline-block;
-  margin-right: 15px;
+  background-color: #F44A27; padding: 5px 15px; font-weight: bold;
+  display: inline-block; margin-right: 15px; border-radius: 10px;
 }
-
-.banner-text p {
-  font-size: 18px;
-  line-height: 1.6;
-}
+.banner-text p { font-size: 18px; line-height: 1.6; }
 
 .banner-indicators {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+  position: absolute; bottom: 30px; left: 0; width: 100%;
+  display: flex; justify-content: center; gap: 10px;
 }
-
 .indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  padding: 0;
+  width: 12px; height: 12px; border-radius: 50%; border: none;
+  background-color: rgb(196, 196, 196); cursor: pointer; padding: 0;
+}
+.indicator.active { background-color: #F44A27; }
+
+.banner-slider {
+  position: relative; width: 100%; aspect-ratio: 10 / 2; /* 5:1 */
+  overflow: visible;
 }
 
-.indicator.active {
-  background-color: #FF3333; /* Rojo corporativo */
+/* Slide wrapper */
+.keen-slider__slide { display: block; position: relative; }
+
+/* ====== Contenedor del slide (con fondo borroso) ====== */
+.banner-content{
+  height: 100%;
+  margin: 0;
+  border-radius: 90px;
+  max-height: 480px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  overflow: hidden;
+  
+  position: relative;
+  aspect-ratio: 10 / 2;
+  background: #EAE5FD;
+}
+
+/* Fondo borroso usando la misma imagen del banner
+   (desde JSX: style={{ "--bg-img": `url(...)` }}) */
+.banner-content::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-img, none); /* si no se define, queda sin imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(22px) brightness(0.75) saturate(1.05);
+  transform: scale(1.12); /* evita bordes duros del blur */
+  z-index: 0;
+  
+}
+
+/* Imagen/video principal: sin recorte, centrado */
+.banner-picture,
+.banner-media {
+  position: relative;
+  z-index: 1;            /* sobre el blur, bajo overlay/texto */
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* clave para no cortar */
+  object-position: center;
+  background: transparent;
+}
+
+/* Ken Burns suave en activo (opera sobre el media) */
+.keen-slider__slide.is-active .banner-media{
+  animation: kb-zoom var(--kb-duration) var(--kb-ease) forwards;
+}
+@keyframes kb-zoom{
+  from{ transform: scale(var(--kb-scale-start)); }
+  to{   transform: scale(var(--kb-scale-end));   }
+}
+/* Parallax sutil del texto */
+.keen-slider__slide.is-active .banner-text{
+  animation: text-rise 700ms cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes text-rise{ from{ transform: translateY(8px); opacity: .92; } to{ transform: translateY(0); opacity: 1; } }
+
+/* Respeto a reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .keen-slider__slide.is-active .banner-media,
+  .keen-slider__slide.is-active .banner-text{
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .banner-text { padding: 80px 0; }
+  .banner-text h1 { font-size: 40px; }
 }
 
 @media (max-width: 768px) {
-  .hero-banner {
-    height: 400px;
+  .hero-banner { padding: 0 24px; }
+  .banner-slider { aspect-ratio: 16 / 9; }
+  .banner-content {
+    margin: 24px; margin-top: 0;
+    border-radius: 40px;
+    border-top-left-radius: 0; border-top-right-radius: 0;
   }
-  
-  .banner-text {
-    padding: 60px 15px;
-  }
-  
-  .banner-text h1 {
-    font-size: 32px;
-  }
+  .banner-text { padding: 60px 15px; }
+  .banner-text h1 { font-size: 32px; }
 }
+
+/* ===== Ajustes para video ===== */
+
+/* Evita Ken Burns en video (dos vías, por si olvidas la clase en JSX) */
+.is-video .banner-media,
+.banner-media.no-kenburns {
+  animation: none !important;
+}
+
+/* Los videos también van con contain */
+.is-video .banner-media {
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+}
+

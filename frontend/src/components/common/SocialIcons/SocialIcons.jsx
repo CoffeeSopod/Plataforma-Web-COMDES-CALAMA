@@ -1,13 +1,13 @@
 // src/components/common/SocialIcons/SocialIcons.jsx
 import React from 'react';
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 import './SocialIcons.css';
 
 const SocialIcons = () => {
   const socialLinks = [
     { id: 'facebook', url: 'https://facebook.com/comdes.calama', icon: <FaFacebookF /> },
     { id: 'instagram', url: 'https://instagram.com/comdes.calama', icon: <FaInstagram /> },
-    { id: 'twitter', url: 'https://twitter.com/comdes_calama', icon: <FaTwitter /> },
+    { id: 'tiktok', url: 'https://twitter.com/comdes_calama', icon: <FaTiktok  /> },
     { id: 'youtube', url: 'https://youtube.com/comdes.calama', icon: <FaYoutube /> }
   ];
   

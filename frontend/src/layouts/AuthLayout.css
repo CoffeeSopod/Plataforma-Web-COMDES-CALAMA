@@ -1,0 +1,6 @@
+/* src/layouts/auth-layout.css */
+.auth-shell {
+  min-height: 100vh;         /* que la vista ocupe toda la pantalla */
+  display: block;            /* sin paddings globales del sitio */
+  background: transparent;   /* deja que tu propio login maneje fondo/imagen */
+}

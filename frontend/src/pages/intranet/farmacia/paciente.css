@@ -1,0 +1,123 @@
+:root{
+  --container-max: 1100px;
+  --container-pad: clamp(16px, 6vw, 28px);
+  --border: #e5e7eb;
+  --muted: #6b7280;
+  --title: #0f172a;
+  --brand: #16a34a;
+  --brand2:#22c55e;
+}
+
+.px-shell{ max-width: var(--container-max); margin-inline:auto; padding: 12px var(--container-pad) 24px; }
+.px-page{ display:grid; gap:16px; }
+
+.px-header{
+  display:grid; grid-template-columns: 1fr auto; gap:16px; align-items:center;
+}
+.px-header h1{ margin:0; color:var(--title); font-size:22px; }
+.subtitle{ margin:2px 0 0; color:var(--muted); font-size:13px; }
+
+.actions{ display:flex; gap:10px; align-items:center; }
+.btn-ghost{
+  background:#fff; border:1px solid var(--border); color:#0f172a;
+  padding:10px 12px; border-radius:12px; cursor:pointer;
+}
+.btn-primary{
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  color:#fff; border:0; border-radius:12px; cursor:pointer;
+  padding:10px 14px; font-weight:800; box-shadow:0 8px 20px rgba(34,197,94,.25);
+}
+
+/* buscador */
+.search-wrap{ position:relative; }
+.search-wrap .search-ico{
+  position:absolute; left:10px; top:50%; transform:translateY(-50%);
+  width:18px; height:18px; fill:#94a3b8;
+}
+.search{
+  width: clamp(220px, 28vw, 360px);
+  padding: 10px 12px 10px 34px;
+  border:1px solid var(--border); border-radius:12px; outline:none;
+}
+.search:focus{ border-color:#94a3b8; }
+
+.alert.error{ background:#fef2f2; border:1px solid #ef4444; color:#991b1b; padding:10px 12px; border-radius:10px; }
+
+/* tabla */
+.table-wrap{
+  overflow:auto; background:#fff; border:1px solid var(--border); border-radius:16px;
+}
+.table{ width:100%; border-collapse:separate; border-spacing:0; }
+thead th{
+  position:sticky; top:0; z-index:1; background:#f8fafc; color:#0f172a;
+  font-weight:800; font-size:12.5px; text-align:left; padding:12px 14px; border-bottom:1px solid #eef2f7;
+}
+tbody td{ padding:12px 14px; border-bottom:1px solid #f3f4f6; vertical-align:middle; }
+tbody tr:hover{ background:#fafafa; }
+
+.th-sortable{ cursor:pointer; user-select:none; }
+.sort{
+  display:inline-block; width:0; height:0; margin-left:6px; vertical-align:middle;
+  border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #94a3b8;
+}
+.sort.desc{ border-top:none; border-bottom:6px solid #94a3b8; }
+
+.center{ text-align:center; }
+.name-cell .name-strong{ font-weight:700; color:#0f172a; }
+.name-cell .muted{ font-size:12px; color:#6b7280; }
+
+.contact{ display:flex; gap:6px; flex-wrap:wrap; }
+.chip{
+  display:inline-block; padding:4px 8px; font-size:12px;
+  border-radius:999px; border:1px solid var(--border); background:#f9fafb; color:#111827;
+}
+
+/* paginación */
+.pager{ display:flex; align-items:center; gap:10px; justify-content:center; }
+.pager button{
+  padding:8px 12px; border:1px solid var(--border); border-radius:10px; background:#fff; cursor:pointer;
+}
+.pager button:disabled{ opacity:.55; cursor:default; }
+
+
+/* ---- Modal Import ---- */
+.paciente-modal-backdrop{
+  position: fixed; inset: 0; background: rgba(2,6,23,.45);
+  display: grid; place-items: center; z-index: 50;
+}
+.paciente-modal{
+  width: min(720px, 92vw);
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25); overflow: hidden;
+  animation: pop .16s ease-out both;
+}
+@keyframes pop{ from{ transform: scale(.98); opacity: 0 } to{ transform: scale(1); opacity: 1 } }
+.paciente-modal-head{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 12px 16px; background:#f8fafc; border-bottom:1px solid var(--border);
+}
+.paciente-modal-head h3{ margin:0; font-size:16px; }
+.paciente-btn-x{ border:0; background:transparent; font-size:24px; line-height:1; cursor:pointer; }
+
+.paciente-modal-body{ padding: 16px; display:grid; gap: 12px; }
+.paciente-code{
+  display:block; background:#0f172a; color:#e5e7eb; padding:10px 12px; border-radius:10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:12px;
+}
+.paciente-upload-form{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.paciente-import-summary{ border-top:1px solid var(--border); padding-top:12px; }
+.paciente-import-summary h4{ margin:0 0 6px; }
+.paciente-error-table{ border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.paciente-error-head, .error-row{ display:grid; grid-template-columns: 70px 160px 1fr; }
+.paciente-error-head{ background:#f8fafc; font-weight:700; padding:8px 10px; }
+.paciente-error-row{ border-top:1px solid var(--border); padding:8px 10px; }
+.paciente-actions-end{ display:flex; justify-content:flex-end; gap:10px; margin-top:10px; }
+
+
+
+/* responsive */
+@media (max-width: 900px){
+  .px-header{ grid-template-columns: 1fr; }
+  .actions{ justify-content: space-between; flex-wrap: wrap; }
+  .search{ width: min(100%, 360px); }
+}

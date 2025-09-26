@@ -46,7 +46,6 @@
 }
 
 /* ------------------------------------Sección del Organigrama -------------------------------------------*/
-/* Sección de Misión y Visión */
 .organigram-section {
   background: linear-gradient(90deg, #9933CC 0%, #003399 100%);
   color: white;
@@ -67,33 +66,51 @@
 
 /* Sección de Misión y Visión */
 .mission-vision {
-  background-color: var(--color-light-gray);
-  padding: 60px 0;
+  background: linear-gradient(90deg,rgb(0, 46, 139) 0%, rgba(105, 57, 183, 1) 44%, rgba(255, 105, 76, 1) 100%);;
+  padding: 80px 0;
 }
 
 .mission-vision-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 60px;
 }
 
 .mission-box, .vision-box {
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  background-color: #53538d;
+  padding: 24px 32px;
+  border-radius: 16px;
+  box-shadow: -14px 12px 10px -1px rgba(244,74,39,0.21);
   height: 100%;
 }
 
+.mission-box{
+  background-image: url('/assets/images/about/mision.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.vision-box{
+  background-image: url('/assets/images/about/vision.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
 .mission-box h3, .vision-box h3 {
-  color: var(--color-red);
+  color: #F44A27;
   margin-bottom: 15px;
-  font-size: 22px;
+  font-size: 24px;
   text-align: center;
 }
 
 .mission-box p, .vision-box p {
-  line-height: 1.7;
+  line-height: 1.8;
+  font-style: italic;
+  text-align: justify;
+  color: #003399;
+  padding: 24px;
 }
 
 /* Sección de Valores */

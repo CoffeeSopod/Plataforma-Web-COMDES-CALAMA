@@ -28,3 +28,45 @@ npm install framer-motion
 npm install @mui/material @emotion/react @emotion/styled
 # O
 npm install @chakra-ui/react @emotion/react @emotion/styled
+
+# Boostrap para los modales
+npm install react-bootstrap bootstrap
+
+# Dependencia SQL de backend
+npm i mysql2 dotenv
+
+# Encriptador de password de backend
+npm i bcryptjs
+
+# Iconos de FontAwesome
+npm i --save @fortawesome/react-fontawesome@latest
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
+npm i --save @fortawesome/free-brands-svg-icons
+
+
+# tablas para la intranet
+npm i @tanstack/react-table
+npm i @tanstack/react-virtual
+
+# importacion de archivos IMG Y EXCEL
+npm i multer
+npm i multer xlsx 
+
+
+# backend
+npm i socket.io multer jsonwebtoken mysql2
+# frontend
+npm i socket.io-client
+
+
+# emojis para el chat
+npm i emoji-picker-element@1.1.0
+
+# Carrusel para las cards
+npm i embla-carousel-react embla-carousel-autoplay
+
+
+# Carrusel para 
+npm i keen-slider

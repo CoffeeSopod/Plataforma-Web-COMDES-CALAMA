@@ -1,211 +1,334 @@
-html {
-  scroll-behavior: smooth;
+/* ================== Variables y utilidades ================== */
+:root{
+  --header-h: 74px;         /* alto aproximado del header */
+  --maxw: 1200px;
+  --pad-x: clamp(16px, 4vw, 24px);
+
+  --bg-grad: linear-gradient(90deg, rgba(0, 47, 139, 1) 0%,
+                                      rgba(105, 57, 183, 1) 44%,
+                                      rgba(255, 105, 76, 1) 100%);
+  --bg-img: url('/assets/images/header/banner_header.png');
+
+  --c-white: #f8f8f8;
+  --c-text: #0f172a;
+  --c-muted: #64748b;
+  --c-yellow: #fde047;
+  --c-border: rgba(15,23,42,.08);
+
+  --btn-grad-a:#ff5a2e;
+  --btn-grad-b:#ff7b3b;
+
+  --stripe-h: 4px; /* alto de las barras inferiores */
 }
 
-.header {
-  width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Scroll suave global + respeto por accesibilidad */
+html{ scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *{ animation:none!important; transition:none!important; }
 }
 
-.container {
-  max-width: 1200px;
+/* Evita que las anclas queden ocultas tras el header fijo */
+[id]{ scroll-margin-top: calc(var(--header-h) + 14px); }
+
+/* ================== Top Bar (fixed) ================== */
+/* 1) El sticky va en el HEADER, no en .top-bar */
+.header{
+  position: sticky;   /* 👈 aquí va el sticky real */
+  top: 0;
+  z-index: 1100;
+}
+
+/* 2) .top-bar deja de ser sticky; sí queda relative para las barras */
+.top-bar{
+  position: relative;         /* 👈 antes estaba sticky */
+  /* mantiene el resto de estilos que ya tienes */
+  background-image: var(--bg-grad), var(--bg-img);
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-blend-mode: hard-light;
+  backdrop-filter: saturate(140%) blur(2px);
+  -webkit-backdrop-filter: saturate(140%) blur(2px);
+  color: var(--c-white);
+  padding: 16px 0;
+  padding-bottom: var(--stripe-h);
+  box-shadow: 0 2px 10px rgba(0,0,0,.10);
+}
+
+/* 3) No empujes el body (eso era solo para fixed) */
+/* body{ padding-top: calc(var(--header-h) + var(--stripe-h)); } */
+
+/* 4) Mantén el scroll-margin-top para anclas */
+[id]{ scroll-margin-top: calc(var(--header-h) + 14px); }
+
+
+/* Contenedor del topbar */
+.topbar-container{
+  max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 15px;
-  display: flex;
+  padding: 0 var(--pad-x);
+
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* izq - centro - der */
   align-items: center;
+  gap: 16px;
+  min-height: var(--header-h);
 }
 
-/* TopBar Styles */
-.top-bar {
-  background: linear-gradient(90deg, #003399 0%, #9933CC 100%);
-  color: white;
-  padding: 10px 0;
+/* IZQUIERDA: logo */
+.tb-left .logo{
+  max-height: 56px;
+  display: block;
+  margin-bottom: 10px;
 }
 
-.top-bar .container {
-  justify-content: space-between;
+/* CENTRO: menú centrado */
+.tb-center{ display:flex; justify-content:center; }
+.nav-links{
+  display:flex; align-items:center; gap:24px;
+  list-style:none; margin:0; padding:0;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  max-height: 60px;
-  margin-right: 10px;
-}
-
-.slogan {
-  font-style: italic;
-  font-size: 14px;
-  padding-left: 10px;
-  margin-left: 10px;
-  border-left: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.transparency-links {
-  display: flex;
-  gap: 20px;
-}
-
-.transparency-link {
-  color: white;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-}
-
-.check-icon {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  color: #003399;
-  border-radius: 50%;
-  margin-right: 5px;
-  font-weight: bold;
-}
-
-/* MainNav Styles */
-.main-nav {
-  background: linear-gradient(90deg, #FF3333 0%, #FF9900 100%);
-  padding: 15px 0;
-}
-
-.main-nav .container {
-  justify-content: space-between;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-item {
-  margin-right: 25px;
-}
-
-.nav-item a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-  transition: opacity 0.2s;
-}
-
-.nav-item a:hover, .nav-item a.active {
-  opacity: 0.8;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-
-.enlaces-dropdown{
-  font-weight: 500;
-  font-size: 16px;
+/* ================== Enlaces y triggers de PRIMER NIVEL ================== */
+.nav-links > .nav-item > a,
+.nav-links > .nav-item > .active,
+.nav-links > .nav-item > .dropdown-trigger{
   position: relative;
-  display: inline-block;
-}
-
-.phone-number{
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dropdown-arrow {
-  font-size: 12px;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 8px 0;
-  margin-top: 4px;
-  z-index: 100;
-  width: 260px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  list-style: none;
-}
-
-.dropdown-menu li {
-  list-style: none;
-  padding: 6px 12px;
-  font-size: 14px;
-  cursor: default;
-}
-
-.dropdown-menu li:hover{
-  list-style: none;
-  background-color: #cdcbce;
-}
-
-.search-form {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.search-input {
-  border: none;
-  padding: 8px 12px;
+  color: var(--c-white);          /* base: blanco */
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 6px 2px;
+  opacity: .95;
+  transition: color .18s ease, opacity .18s ease, transform .12s ease;
   outline: none;
-  font-size: 14px;
-  width: 200px;
-}
-
-.search-button {
-  background: none;
-  border: none;
-  padding: 8px 12px;
+  background: transparent; border: 0; /* para el button trigger */
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;  /* evita bailes por baseline del botón */
+  line-height: 1;
+  padding: 6px 2px;        /* mismo padding que ya usas */
+  margin-bottom: 10px;
+}
+.enlace-title{
+  margin-bottom: -10px;
+  padding: 0;
+  line-height: 1;
+  font: inherit;
+  color: inherit;
 }
 
-.search-icon {
-  color: #777;
+
+
+/* Hover/activo de primer nivel */
+.nav-links > .nav-item > a:hover,
+.nav-links > .nav-item > .active,
+.nav-links > .nav-item > .dropdown-trigger:hover{
+  color: var(--c-yellow);
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
-/* Media Queries for Responsive Design */
-@media (max-width: 1024px) {
-  .transparency-links {
-    display: none;
-  }
+/* Subrayado animado para primer nivel (anchors y trigger) */
+.nav-links > .nav-item > a::after,
+.nav-links > .nav-item > .active::after,
+.nav-links > .nav-item > .dropdown-trigger::after{
+  content:"";
+  position: absolute;
+  left:0; bottom:-3px;
+  width:100%; height:2px; background: var(--c-yellow);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .22s ease;
+}
+.nav-links > .nav-item > a:hover::after,
+.nav-links > .nav-item > .active::after,
+.nav-links > .nav-item > .dropdown-trigger:hover::after{
+  transform: scaleX(1);
 }
 
-@media (max-width: 768px) {
-  .top-bar .container, .main-nav .container {
-    flex-direction: column;
-    gap: 10px;
+/* Foco accesible de primer nivel */
+.nav-links > .nav-item > a:focus-visible,
+.nav-links > .nav-item > .dropdown-trigger:focus-visible{
+  outline:2px solid var(--c-yellow);
+  outline-offset: 3px; border-radius: 6px;
+}
+
+.nav-links > .nav-item > .dropdown-trigger::after{
+  bottom: -10px;  /* -3px (base) - 10px del margin hack = -13px */
+}
+/* ================== Dropdown (hover/focus con animación y retardo) ================== */
+.has-dropdown{ 
+  position: relative; 
+  padding-bottom: 10px;            /* puente para que no se cierre al bajar el mouse */
+}
+
+/* caret animado al abrir */
+.dropdown-trigger .caret{ transition: transform .18s ease; }
+.has-dropdown:hover .caret,
+.has-dropdown:focus-within .caret{ transform: rotate(180deg); }
+
+/* Menú: oculto por defecto (sin quitarlo del DOM) */
+.dropdown-menu{
+  position:absolute; top:100%; left:0;  /* sin hueco */
+  min-width: 260px;
+  background:#ffffff; color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: 10px; padding: 6px 0;
+  box-shadow: 0 14px 34px rgba(0,0,0,.20);
+  z-index: 1200;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px) scale(.98);
+  pointer-events: none;
+
+  /* retardo SOLO al cerrar */
+  transition:
+    opacity .16s ease .12s,
+    transform .16s ease .12s,
+    visibility 0s linear .28s;
+  will-change: opacity, transform;
+}
+
+/* Abierto: al hacer hover o al enfocarlo (teclado/tap) */
+.has-dropdown:hover > .dropdown-menu,
+.has-dropdown:focus-within > .dropdown-menu{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+
+  /* sin delay al abrir */
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility 0s;
+}
+
+.dropdown-menu li{ list-style:none; }
+
+/* Ítems del menú (texto oscuro) */
+.has-dropdown .dropdown-menu .dropdown-link{
+  display:flex; align-items:center; gap:8px;
+  padding:10px 12px; text-decoration:none;
+  font-weight:600;
+  color: var(--c-text);                /* negro/gris oscuro */
+  transition: background .16s ease, color .16s ease, padding-left .16s ease;
+}
+.has-dropdown .dropdown-menu .dropdown-link:hover{
+  background:#fff7ed;
+  color:#9a3412;
+  padding-left:16px;
+}
+
+/* ================== Derecha: botón CTA Intranet ================== */
+.tb-right{ display:flex; justify-content:flex-end; }
+.btn-intranet{
+  display:inline-block; 
+  padding:0.5rem 1.2rem;
+  color:#fff; 
+  text-decoration:none; 
+  font-weight: 900;
+  border: 2px solid white;
+  border-radius: 32px;
+  box-shadow: 0 10px 22px rgba(244,90,46,.25);
+  transition: transform .12s ease, box-shadow .12s ease, filter .18s ease, opacity .2s ease;
+  margin-bottom: 10px;
+}
+.btn-intranet:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(244,90,46,.32);
+  filter: brightness(1.06);
+  background-color: #F44A27;
+  color: var(--c-white);
+}
+.btn-intranet:focus-visible{
+  outline:2px solid var(--c-yellow); outline-offset:3px;
+}
+
+/* ====== Barras de color bajo el navbar ====== */
+.topbar-stripes{
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  width: 100%;
+  height: var(--stripe-h);
+  display: flex;
+  margin: 0; padding: 0;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05) inset;
+}
+.topbar-stripes .stripe{ flex: 1 1 0; display: block; }
+
+/* Colores (morado, azul, verde, blanco, amarillo, naranja y rojo) */
+.stripe-purple{ background: #6D28D9; }  /* morado */
+.stripe-blue  { background: #1D4ED8; }  /* azul   */
+.stripe-green { background: #16A34A; }  /* verde  */
+.stripe-white { background: #FFFFFF; }  /* blanco */
+.stripe-yellow{ background: #FDE047; }  /* amarillo */
+.stripe-orange{ background: #FB923C; }  /* naranja */
+.stripe-red   { background: #DC2626; }  /* rojo   */
+
+/* Alinear todos los items de la barra (incluye triggers con caret) */
+.nav-links > .nav-item{
+  display: flex;
+  align-items: center;
+}
+
+/* El trigger se comporta como un enlace de primer nivel */
+.dropdown-trigger{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.2;           /* altura de línea similar a los links */
+}
+
+/* Alinear visualmente el caret con el texto */
+.dropdown-trigger .caret{
+  line-height: 1;
+  transform-origin: center;
+  position: relative;
+  top: 6px;                    /* microajuste vertical */
+}
+
+/* Estado "closing": fuerza ocultar el menú justo tras el click */
+.has-dropdown.closing > .dropdown-menu{
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-4px) scale(.98) !important;
+  pointer-events: none !important;
+  transition:
+    opacity .12s ease,
+    transform .12s ease,
+    visibility 0s linear .12s;
+}
+
+
+
+
+
+/* (Opcional) modo oscuro: mantén el blanco brillante */
+@media (prefers-color-scheme: dark){
+  .stripe-white{ background: #FFFFFF; }
+}
+
+/* ================== Responsive ================== */
+@media (max-width: 980px){
+  .nav-links{ gap:16px; }
+}
+@media (max-width: 760px){
+  .topbar-container{
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "left right"
+      "center center";
+    row-gap: 10px;
   }
-  
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .nav-item {
-    margin: 5px 10px;
-  }
-  
-  .search-input {
-    width: 150px;
+  .tb-left{ grid-area:left; }
+  .tb-center{ grid-area:center; justify-content:center; }
+  .tb-right{ grid-area:right; }
+
+  .nav-links{
+    flex-wrap: wrap; justify-content: center;
   }
 }

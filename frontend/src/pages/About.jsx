@@ -70,14 +70,14 @@ const About = () => {
             <div className="mission-box">
               <h3>Nuestra Misión</h3>
               <p>
-                Promover, garantizar y administrar para nuestra comunidad, los servicios de salud a 
-                través de una gestión innovadora, eficiente e inclusiva.
+                "Promover, garantizar y administrar para nuestra comunidad, los servicios de salud a 
+                través de una gestión innovadora, eficiente e inclusiva."
               </p>
             </div>
             <div className="vision-box">
               <h3>Nuestra Visión</h3>
               <p>
-                Ser una corporación líder en la administración de recursos municipales.
+                "Ser una corporación líder en la administración de recursos municipales."
               </p>
             </div>
           </div>
@@ -132,7 +132,7 @@ const About = () => {
             </div>
 
             <div className="organigram-image">
-              <img src="/assets/images/about/organigrama_2025.jpg" alt="Organigrama COMDES Calama" />
+              <img src="/assets/images/about/organigrama_2025.png" alt="Organigrama COMDES Calama" />
             </div>
 
           </div>
